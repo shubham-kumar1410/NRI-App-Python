@@ -3,16 +3,12 @@ import Initial_Steps
 import tkMessageBox
 import time
 
-
-
-
 class timer:
 
     def __init__(self):
         self.root = Tk()
         self.time1 = ''
         #self.root.attributes('-zoomed', True)
-
 
     def tick(self):
         global time1
@@ -21,7 +17,6 @@ class timer:
             self.time1 = self.time2
             self.L2.config(text=self.time2)
         self.L2.after(200, self.tick)
-
 
     def start(self):
         global birth_time
