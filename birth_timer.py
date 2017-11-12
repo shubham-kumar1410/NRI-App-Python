@@ -1,6 +1,6 @@
-from Tkinter import*
+from tkinter import*
 import Initial_Steps
-import tkMessageBox
+from tkinter.messagebox import *
 import time
 
 class timer:
@@ -8,7 +8,7 @@ class timer:
     def __init__(self):
         self.root = Tk()
         self.time1 = ''
-        #self.root.attributes('-zoomed', True)
+        self.root.attributes('-fullscreen', True)
 
     def tick(self):
         global time1
@@ -28,7 +28,7 @@ class timer:
         self.tick()  
 
     def routine_care(self):
-        tkMessageBox.showinfo("Routine Care"," 1.CUT CORD AFTER 1 MINUTE AND WITHIN 3 MINUTES \n 2.COVER BABY AND MOTHER TOGETHER \n 3.CONTINUE SKIN TO SKIN CARE \n 4.CHECK BREATHING AND COLOR \n 5.INITIATE BREASTFEEDING")
+        showinfo("Routine Care"," 1.CUT CORD AFTER 1 MINUTE AND WITHIN 3 MINUTES \n 2.COVER BABY AND MOTHER TOGETHER \n 3.CONTINUE SKIN TO SKIN CARE \n 4.CHECK BREATHING AND COLOR \n 5.INITIATE BREASTFEEDING")
         self.root.quit()
         self.root.destroy()
         
@@ -44,7 +44,7 @@ class timer:
     #Buttons
     def button(self):
         self.B1 = Button(self.root, text="               Start               ",command=self.start,font = ("Times", 100))
-        self.B1.grid(row=1,column=0,pady=10,padx=20)
+        self.B1.grid(row=1,column=0,pady=10,padx=80)
 
         self.B2 = Button(self.root, text="YES",command=self.routine_care,font = ("Times", 35))
         self.B2.grid_remove()

@@ -1,57 +1,76 @@
-from Tkinter import*
-import tkMessageBox
+from tkinter import*
+from tkinter.messagebox import *
 import birth_timer
 import time
 
 
 def function():
-    tkMessageBox.showinfo("Routine Care"," 1.NOTE THE TIME OF BIRTH \n 2.RECEIVE BABY IN DRY & WARM LINEN \n 3.PLACE THE BABY PRONE ON MOTHER'S ABDOMEN \n 4.DRY THE BABY")
-    master.quit() 
     master.destroy()
-    x = birth_timer.timer()
-    x.button()
-    x.label()
+    root2=Tk()
+    root2.attributes('-fullscreen', True)      
+    def function2():
+        root2.destroy()
+        x = birth_timer.timer()
+        x.button()
+        x.label()
+    Label(root2, text = "BIRTH\n\n",font=("Times", 25,"bold")).pack()
+    Label(root2, text = "1.NOTE THE TIME OF BIRTH \n",font=("Times", 18,"bold")).pack()
+    Label(root2, text = "2.RECEIVE BABY IN DRY & WARM LINEN \n",font=("Times", 18,"bold")).pack()
+    Label(root2, text = "3.PLACE THE BABY PRONE ON MOTHER'S \nABDOMEN \n ",font=("Times", 18,"bold")).pack()
+    Label(root2, text = "4.DRY THE BABY\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",font=("Times", 18,"bold")).pack()
+    Button(root2, text = "NEXT", fg='purple',command = function2,width=20,font = ("Times", 13)).pack(anchor='c')
+    root2.mainloop()
 
 
 
 master = Tk()
-master.attributes('-zoomed', True)
+master.attributes('-fullscreen', True)
 var1 = IntVar()
 var2 = IntVar()
 var3 = IntVar()
 var4 = IntVar()
 
+def fn_info1():
+    showinfo("Gestational Age-PreTerm","-Specially trained person in Preterm\n Resuscitation \n -Special attention to temperature \n management \n -CPAP and oxygen blender \ndesirable")
+btn1=Button(master,text="(i)",command=fn_info1)
+
+def fn_info2():
+    showinfo("No. of expected babies:Multiple","One team per baby should be there.")
+btn2=Button(master,text="(i)",command=fn_info2)
+
+def fn_info3():
+    showinfo("Associated Risk \n Factor:Antepartum Haemorrha...","Special attention should be given \n to fluid resuscitations(NS OR Rh \n Negative blood)")
+btn3=Button(master,text="(i)",command=fn_info3)
+
 list = ['Antepartum Haemorrhage', 'Diabetes', 'Hypertension' , 'Other', 'None']
-mytext = """2. PERFORM EQUIPMENT CHECK UP
-          a. Providing warmth
-      b. Clearing airway
-   c. Auscultation
-   d. Oxygenation
-e. Ventilation
-f. Intubation
-g. Medication
-"""
 
-Label(master, text = "1. OBTAIN RELEVENT PERINATAL HISTORY",font=("Times", 17,"bold")).grid(row=0, sticky=W)
-Label(master, text = "  A. Gestational age",font=("Times", 15,"bold")).grid(row=2, sticky=W)
-Radiobutton(master, text = "Pre - Term", variable = var1, value = 1,font = ("Times", 15)).grid(row=3, sticky=W)
-Radiobutton(master, text = "Term", variable = var1, value = 2,font = ("Times", 15)).grid(row=4, sticky=W)
+Label(master, text = "Obtain Relevent Perinatal History",font=("Times", 25,"bold")).pack()
+Label(master, text = "  1. Gestational age",font=("Times", 15,"bold")).pack(anchor='w')
+btn1.pack(anchor='e')
+Radiobutton(master, text = "Pre Term", variable = var1, value = 1,font = ("Times", 15)).pack(anchor='w')
+Radiobutton(master, text = "Term", variable = var1, value = 2,font = ("Times", 15)).pack(anchor='w')
 
-Label(master, text = "  B. Liquor(Meconium Stained)",font=("Times", 15,"bold")).grid(row=5, sticky=W)
-Radiobutton(master, text = "Yes", variable = var2, value = 1,font = ("Times", 15)).grid(row=6, sticky=W)
-Radiobutton(master, text = "No", variable = var2, value = 2,font = ("Times", 15)).grid(row=7, sticky=W)
+Label(master, text = "  2. Expected Number of Babies",font=("Times", 15,"bold")).pack(anchor='w')
+btn2.pack(anchor='e')
+Radiobutton(master, text = "Single", variable = var3, value = 1,font = ("Times", 15)).pack(anchor='w')
+Radiobutton(master, text = "Plural", variable = var3, value = 2,font = ("Times", 15)).pack(anchor='w')
 
-Label(master, text = "  C. Expected Number of Babies",font=("Times", 15,"bold")).grid(row=8, sticky=W)
-Radiobutton(master, text = "Single", variable = var3, value = 1,font = ("Times", 15)).grid(row=9, sticky=W)
-Radiobutton(master, text = "Plural", variable = var3, value = 2,font = ("Times", 15)).grid(row=10, sticky=W)
-
-Label(master, text = "  D. Associated Risk Factors",font=("Times", 15,"bold")).grid(row=11, sticky=W)
+Label(master, text = "  3. Associated Risk Factors",font=("Times", 15,"bold")).pack(anchor='w')
+btn3.pack(anchor='e')
 for i in range(len(list)):
-       Radiobutton(master, text = list[i], variable = var4, value = i+1,font = ("Times", 15)).grid(row=(i+12), sticky=W)
+       Checkbutton(master, text = list[i], variable = var4,font = ("Times", 15)).pack(anchor='w')
 
-Label(master, text = mytext,font = ("Times", 12,)).grid(row=17, sticky=W)
-Label(master, text = "3. DECIDE PLAN AND ASSIGN TEAM MEMBER ROLES",font = ("Times", 12)).grid(row=18, sticky=W)
+Label(master,text="Perform Equipment Check Up",font = ("Times", 20,"bold")).pack(anchor='w')
 
-Button(master, text = "OK", command = function).grid(row=19, sticky=W)
+Label(master, text ='a.Providing warmth',font = ("Times", 14,)).pack(anchor='w')
+Label(master, text ='b.Clearing airway',font = ("Times", 14,)).pack(anchor='w')
+Label(master, text ='c.Auscultation',font = ("Times", 14,)).pack(anchor='w')
+Label(master, text ='d.Oxygenation',font = ("Times", 14,)).pack(anchor='w')
+Label(master, text ='e.Ventilation',font = ("Times", 14,)).pack(anchor='w')
+Label(master, text ='f.Incubation',font = ("Times", 14,)).pack(anchor='w')
+Label(master, text ='g.Medication',font = ("Times", 14,)).pack(anchor='w')
+Label(master, text = "Decide Plan And Assign Team Member Roles \n",font = ("Times", 20,"bold")).pack()
+
+Button(master, text = "NEXT", fg='purple',command = function,width=20,font = ("Times", 13)).pack(anchor='c')
 
 mainloop()
