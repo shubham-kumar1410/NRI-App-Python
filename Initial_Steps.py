@@ -1,7 +1,6 @@
-from Tkinter import*
-import tkMessageBox
+from tkinter import *
 import time
-
+from tkinter.messagebox import *
 mytext = "INITIAL STEPS \n -Clamp and cut cord immediately \n -Place under radiant warmer \n -Postition head with neck slightly extended \n -Clear airway by suctioning mouth then nose \n Stimulate by running the back \n Reposition"
 
 
@@ -10,7 +9,7 @@ class Initial_Steps:
 	def __init__(self):
 		self.root = Tk()
 		self.time1 = ''
-		self.root.attributes('-zoomed', True)
+		self.root.attributes('-fullscreen', True)
 
 	def tick(self):
 		global time1

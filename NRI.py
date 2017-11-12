@@ -1,52 +1,55 @@
-from Tkinter import *
-fields = 'Last Name', 'First Name', 'Job', 'Country'
+from tkinter import *
 
-def fetch(entries):
-   for entry in entries:
-      field = entry[0]
-      text  = entry[1].get()
-      print('%s: "%s"' % (field, text)) 
+root = Tk()
+root.attributes('-fullscreen', True)
 
-def makeform(root, fields):
-   entries = []
-   for field in fields:
-      row = Frame(root)
-      lab = Label(row, width=15, text=field, anchor='w')
-      ent = Entry(row)
-      row.pack(side=TOP, fill=X, padx=5, pady=5)
-      lab.pack(side=LEFT)
-      ent.pack(side=RIGHT, expand=YES, fill=X)
-      entries.append((field, ent))
-   v= StringVar()
-   Label(root, width=15, text='SEX', padx=5, pady=5,anchor='w').pack(side=LEFT)
+class allfields(object):
+   i=0
+   j=0
+   def __init__(self,field_name):
+      self.text=field_name
+      self.Label=Label(root,text=self.text)
+      self.entry=Entry(root)
+      self.Label.grid(row=allfields.i,column=allfields.j)
+      self.entry.grid(row=allfields.i,column=allfields.j+1,columnspan=2)
+      allfields.i+=1
 
-   Radiobutton(root,text="Male",
-            padx = 0, 
-            variable=v, 
-            value='Male').pack(anchor = W,side=LEFT)
-   Radiobutton(root, 
-            text="Female",
-            padx = 0, 
-            variable=v, 
-            value='Female').pack(anchor = W,side=LEFT)
-   entries.append(('SEX',v))
-   
-  
-   return entries
-  
+Last_name=allfields('Last Name')
+First_name=allfields('First Name')
+job=allfields('Job Name')
+nationality=allfields('Nationality')
+
+v=IntVar()
+Label(root, width=15, text='SEX', padx=5, pady=5,anchor='w').grid(row=allfields.i+2,column=0)
+Radiobutton(root,text="Male",padx = 0,variable=v, value=1).grid(row=allfields.i+2,column=1)
+Radiobutton(root,text="Female",padx = 0, variable=v, value=2).grid(row=allfields.i+2,column=2)
+
+gen_trans={1:'Male',2:'Female'}
+
+def printer():
+   var_list=[Last_name,First_name,job,nationality]
+   for i in var_list:
+      print (str(i.text)+":"+str(i.entry.get()))
+   if int(v.get()) == 1:
+      ok='Male'
+   else:
+      ok='Female'
+   print('Sex:'+ok)
+def destroy():
+   root.destroy()
+class Buttons(allfields):
+   i=allfields.i+5
+   col=1
+   def __init__(self,text,fn,side):
+      self.command=fn
+      self.side=side
+      self.text=text
+      self.button=Button(root,command=self.command,text=self.text)
+      self.button.grid(row=Buttons.i,column=Buttons.col)
+      Buttons.col+=1
+
+b1=Buttons('Show',printer,BOTTOM)
+b2=Buttons('Quit',destroy,LEFT)
 
 
-if __name__ == '__main__':
-   root = Tk()
-   root.wm_title("NRI")
-   ents = makeform(root, fields)
-   root.bind('<Return>', (lambda event, e=ents: fetch(e)))   
-   b1 = Button(root, text='Show',
-          command=(lambda e=ents: fetch(e)))
-   b1.pack(side=LEFT, padx=5, pady=5)
-   
-   b2 = Button(root, text='Quit', command=root.quit)
-   b2.pack(side=LEFT, padx=5, pady=5)
-   
-
-   root.mainloop()
+root.mainloop()
